@@ -78,8 +78,13 @@ function streamAudio(targetUrl, res, redirectDepth = 0) {
   });
 }
 
-// נתיב ראשי /status לבדיקת בריאות השרת
+// הפניה ישירה מהנתיב הראשי לאתר החיצוני
 app.get('/', (req, res) => {
+  res.redirect('https://david.kesug.com/Event-calendar/?i=1');
+});
+
+// נתיב נפרד לבדיקת סטטוס ותקינות השרת במידת הצורך
+app.get('/status', (req, res) => {
   res.json({
     status: 'online',
     stationsAvailable: Object.keys(STATIONS).map(id => ({
